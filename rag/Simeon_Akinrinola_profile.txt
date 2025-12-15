@@ -1,0 +1,138 @@
+Name: Simeon Inioluwa Akinrinola
+Preferred Name: Akin
+Email: simeonakinrinola7@gmail.com
+Phone: 09065979423
+LinkedIn: www.linkedin.com/in/simeon-akinrinola
+Location: Lagos, Nigeria
+Description: I am an AI Developer specializing in building retrieval-augmented generation (RAG) pipelines, fine-tuning models, selecting optimal AI architectures, and implementing best practices in AI solutions. I focus on leveraging LangChain, OpenAI, and cutting-edge AI tools to solve complex problems efficiently.
+________________
+Skills:
+Technical Skills:
+- React, TailwindCSS, Python, LangChain, OpenAI, Google AI, FastAPI, Transformers, Torch
+- Additional AI/ML skills: embeddings, vector stores, prompt engineering, model evaluation, LLM optimization
+Soft Skills:
+- Teamwork
+- Problem Solving
+- Communication (skilled at explaining AI and technical concepts to non-technical audiences)
+________________
+Professional Experience:
+Title: AI Data Annotator (One-Time Project)
+Company: Awarri
+Dates: 2025
+Description: Participated in a one-time AI data annotation project, preparing and labeling data for machine learning pipelines, ensuring accuracy and consistency in datasets.
+
+Title: Banking Intern
+Company: Access Bank Plc, Lagos
+Dates: Feb 2025 – Present
+Description: Delivered frontline banking support including deposits, withdrawals, fund transfers, and cheque processing. Assisted customers with account inquiries and promoted digital banking adoption.
+
+Title: Community Manager / Social Media Manager
+Company: Flourish Opportunities Network, Victoria Island, Lagos
+Dates: Feb 2023 – Jan 2024
+Description: Doubled postgraduate community membership through strategic digital engagement. Maintained brand voice, responded to inquiries, and improved member satisfaction.
+
+Title: IT Support Intern
+Company: Valinno Systems, Ikeja, Lagos
+Dates: Oct 2022 – Jan 2023
+Description: Provided technical support for end-users, deployed POS systems, performed Windows 10 upgrades, and configured network and desktop systems.
+________________
+Education:
+Degree: Bachelor of Science in Physics
+Institution: Federal University of Agriculture, Abeokuta
+Dates: 2017 – 2023
+Additional Learning:
+- GenAI Fellowship, AI Development Track
+- Hamoye Data Science Full Course
+- HarvardX Leadership Certificate (2022 – 2023)
+- Google IT Support Certificate
+________________
+Projects:
+Project:
+Name: ai_chatbot
+Description: Google-ai, Python, React, TailwindCSS.
+Primary Language: Python
+GitHub URL: https://github.com/AkinDiamonds/ai_chatbot
+
+Project:
+Name: AI_fellowship_exam
+Description: No description provided.
+Primary Language: Python
+GitHub URL: https://github.com/AkinDiamonds/AI_fellowship_exam
+
+Project:
+Name: backend
+Description: No description provided.
+Primary Language: Python
+GitHub URL: https://github.com/AkinDiamonds/backend
+
+Project:
+Name: backend_practice
+Description: No description provided.
+Primary Language: Python
+GitHub URL: https://github.com/AkinDiamonds/backend_practice
+
+Project:
+Name: bankapp
+Description: No description provided.
+Primary Language: JavaScript
+GitHub URL: https://github.com/AkinDiamonds/bankapp
+
+Project:
+Name: CONTACT_SAVER
+Description: A simple contact saver built with python
+Primary Language: Python
+GitHub URL: https://github.com/AkinDiamonds/CONTACT_SAVER
+
+
+Project:
+Name: fullstack_practice
+Description: building a test fullstack app.
+Primary Language: Python
+GitHub URL: https://github.com/AkinDiamonds/fullstack_practice
+
+Project:
+Name: Learning_AI_Original
+Description: No description provided.
+Primary Language: Python
+GitHub URL: https://github.com/AkinDiamonds/Learning_AI_Original
+
+Project:
+Name: librarysystem_group_project
+Description: No description provided.
+Primary Language: CSS
+GitHub URL: https://github.com/AkinDiamonds/librarysystem_group_project
+
+Project:
+Name: my_tasks
+Description: No description provided.
+Primary Language: Jupyter Notebook
+GitHub URL: https://github.com/AkinDiamonds/my_tasks
+
+
+Project:
+Name: restaurant_design_AIfellowship_project
+Description: No description provided.
+Primary Language: JavaScript, CSS, HTML
+GitHub URL: https://github.com/AkinDiamonds/restaurant_design_AIfellowship_project
+
+Project:
+Name: simeon-portfolio
+Description: No description provided.
+Primary Language: React, Langchain, Python, FastAPI, TailwindCSS, Openai
+GitHub URL: https://github.com/AkinDiamonds/simeon-portfolio
+
+Project:
+Name: touristai
+Description: No description provided.
+Primary Language: JavaScript, Langchain, Python, FastAPI, TailwindCSS, HuggingFace
+GitHub URL: https://github.com/AkinDiamonds/touristai
+
+Project:
+Name: Web_development
+Description: No description provided.
+Primary Language: Jupyter Notebook
+GitHub URL: https://github.com/AkinDiamonds/Web_development
+________________
+Personal Statement:
+I aspire to become a leading authority and thought leader in the AI industry, driving innovation through building scalable, efficient, and practical AI solutions. I am committed to mastering advanced AI techniques and contributing meaningfully to the global AI community.
+________________
