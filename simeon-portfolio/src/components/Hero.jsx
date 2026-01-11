@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { FaReact, FaHtml5, FaJs, FaCss3Alt, FaPaperPlane, FaRobot } from "react-icons/fa";
+import { FaReact, FaHtml5, FaJs, FaCss3Alt, FaRobot } from "react-icons/fa";
 import { SiTailwindcss, SiOpenai } from "react-icons/si";
-import { IoClose } from "react-icons/io5";
+import { IoClose, IoSend } from "react-icons/io5";
 
 export default function Hero({ scrollToWorks }) {
   const [query, setQuery] = useState("");
@@ -76,75 +76,127 @@ export default function Hero({ scrollToWorks }) {
           High-end Frontend Developer. Interfaces crafted with intent.
         </p>
 
-        {/* AI Chat Interface */}
-        <div className="w-full max-w-2xl mx-auto relative group">
-          <form onSubmit={handleSearch} className="relative z-20">
-            <div className="relative flex items-center">
-              <div className="absolute left-4 text-support/70">
+        {/* AI Chat Interface - Redesigned Layout */}
+        <div className="w-full relative z-20 flex flex-col items-center">
+
+          {/* 1. LARGE INPUT with META STYLE SEND BUTTON */}
+          <form
+            onSubmit={handleSearch}
+            className={`
+              relative transition-all duration-500 ease-out z-30
+              ${showPanel ? 'w-full max-w-xl' : 'w-full max-w-2xl hover:max-w-3xl'}
+            `}
+          >
+            <div className={`
+              relative flex items-center bg-black/30 backdrop-blur-md border border-white/10 
+              rounded-full shadow-2xl transition-all duration-300
+              ${loading ? 'border-support/50 shadow-support/10' : 'hover:border-white/20 hover:bg-black/40'}
+            `}>
+              {/* Robot Icon */}
+              <div className="pl-6 pr-4 text-support/80">
                 <FaRobot size={24} />
               </div>
+
+              {/* Input Field */}
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Ask my AI assistant anything about me..."
-                className="w-full pl-14 pr-14 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-support/50 focus:bg-white/15 transition-all shadow-xl text-lg"
+                placeholder="Ask about my skills, projects, or background..."
+                className="w-full py-5 bg-transparent text-white placeholder-white/40 focus:outline-none text-lg font-medium tracking-wide"
               />
-              <button
-                type="submit"
-                disabled={loading || !query.trim()}
-                className="absolute right-2 p-2 bg-support text-accent-black rounded-xl hover:bg-white hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <FaPaperPlane size={20} />
-              </button>
+
+              {/* Send Button - FITTED & COMPACT */}
+              <div className="pr-2">
+                <button
+                  type="submit"
+                  disabled={loading || !query.trim()}
+                  className={`
+                    w-10 h-10 flex items-center justify-center rounded-full transition-all duration-200 shadow-md
+                    ${query.trim() && !loading
+                      ? 'bg-support text-black scale-100 cursor-pointer hover:bg-white'
+                      : 'bg-white/10 text-white/20 scale-90 cursor-not-allowed'}
+                  `}
+                >
+                  <IoSend size={18} className={query.trim() ? "ml-0.5" : ""} />
+                </button>
+              </div>
             </div>
           </form>
 
-          {/* Expandable Response Panel */}
+          {/* 2. SPACIOUS & WIDE OUTPUT PANEL */}
+          {/* This breaks out of the input's width constraint using fixed/absolute positioning logic relative to the center */}
           <div
             className={`
-                    absolute left-0 right-0 top-full mt-4 
-                    bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl 
-                    overflow-hidden transition-all duration-500 ease-out origin-top shadow-2xl z-10
-                    ${showPanel ? 'opacity-100 max-h-[500px] visible' : 'opacity-0 max-h-0 invisible'}
-                `}
+              absolute top-16 left-1/2 -translate-x-1/2 
+              w-[95vw] max-w-4xl
+              bg-[#080808]/95 backdrop-blur-3xl border border-white/10 rounded-3xl 
+              shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)]
+              overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] z-20 origin-top
+              ${showPanel ? 'opacity-100 translate-y-2 scale-100 visible' : 'opacity-0 -translate-y-4 scale-95 invisible pointer-events-none'}
+            `}
           >
-            <div className="p-6 text-left relative">
+            {/* Elegant Header */}
+            <div className="flex items-center justify-between px-8 py-5 border-b border-white/5 bg-white/[0.02]">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)] animate-pulse"></div>
+                <span className="text-xs font-bold text-white/50 tracking-[0.2em] uppercase font-display">
+                  Simeon's AI Assistant v2.0
+                </span>
+              </div>
+
               <button
                 onClick={closePanel}
-                className="absolute top-4 right-4 text-white/50 hover:text-white transition-colors"
+                className="group flex items-center gap-2 text-xs font-medium text-white/30 hover:text-white transition-colors"
+                aria-label="Close"
               >
-                <IoClose size={24} />
-              </button>
-
-              <div className="flex items-start gap-3 mb-2">
-                <div className="p-2 bg-gradient-to-br from-support to-purple-600 rounded-lg">
-                  <SiOpenai className="text-white text-xl" />
+                <span>CLOSE</span>
+                <div className="p-1 rounded-full group-hover:bg-white/10">
+                  <IoClose size={16} />
                 </div>
-                <h3 className="text-support font-bold text-lg mt-1">Simeon's AI Assistant</h3>
-              </div>
-
-              <div className="mt-4 text-gray-200 leading-relaxed max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
-                {loading ? (
-                  <div className="flex items-center gap-2 text-white/50">
-                    <div className="w-2 h-2 bg-support rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
-                    <div className="w-2 h-2 bg-support rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                    <div className="w-2 h-2 bg-support rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
-                    <span className="ml-2">Thinking...</span>
-                  </div>
-                ) : (
-                  <div className="prose prose-invert max-w-none">
-                    {response?.answer || "No response generated."}
-                  </div>
-                )}
-                {/* Source citations could go here if needed */}
-                {response?.sources && response.sources.length > 0 && !loading && (
-                  <div className="mt-4 pt-4 border-t border-white/10 text-xs text-white/40">
-                    Sources: {response.sources.map(s => s.name).join(", ")}
-                  </div>
-                )}
-              </div>
+              </button>
             </div>
+
+            {/* Massive Content Area */}
+            <div className="p-8 md:p-10 text-left min-h-[200px] max-h-[60vh] overflow-y-auto custom-scrollbar">
+              {loading ? (
+                <div className="flex flex-col items-center justify-center py-20">
+                  <div className="w-16 h-16 mb-6 rounded-full border border-white/10 flex items-center justify-center bg-white/5">
+                    <SiOpenai className="text-2xl text-white/20 animate-pulse" />
+                  </div>
+                  <div className="space-y-2 text-center">
+                    <div className="h-2 w-32 bg-white/10 rounded-full animate-pulse mx-auto"></div>
+                    <div className="h-2 w-24 bg-white/5 rounded-full animate-pulse mx-auto"></div>
+                  </div>
+                </div>
+              ) : response?.answer ? (
+                <div className="animate-in fade-in slide-in-from-bottom-2 duration-500">
+                  <div
+                    className="prose prose-invert prose-lg max-w-none ai-response leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: response.answer }}
+                  />
+
+                  {/* Floating Sources Tags */}
+                  {response.sources && response.sources.length > 0 && (
+                    <div className="mt-10 pt-6 border-t border-dashed border-white/10 flex flex-wrap gap-3">
+                      {response.sources.map((s, idx) => (
+                        <span key={idx} className="inline-flex items-center px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full text-[10px] sm:text-xs text-white/50 hover:text-white/80 transition-colors uppercase tracking-wider cursor-default">
+                          <span className="w-1 h-1 rounded-full bg-support/50 mr-2"></span>
+                          {s.section_type.replace('_', ' ')}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center py-16 text-center opacity-40">
+                  <p className="text-sm">Ready to explore.</p>
+                </div>
+              )}
+            </div>
+
+            {/* Subtle Gradient Line at bottom */}
+            <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-support/20 to-transparent"></div>
           </div>
         </div>
 
