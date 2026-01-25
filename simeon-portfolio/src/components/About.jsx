@@ -1,284 +1,135 @@
-// About.jsx
-import React from "react";
-import { motion } from "framer-motion";
+import React from 'react';
+import { Cpu, Zap, HardDrive, Activity } from 'lucide-react';
 
-/*
-  About page
-  - Minimal, persuasive, easy to scan.
-  - Fixed "30s read" at the top.
-  - Medium backdrop blur cards.
-  - Fade-up reveal as the reader scrolls.
-  - Primary CTA: Contact (I reply within 12 hours).
-  - Comments are short and to the point (my voice).
-*/
+const PROFILE_IMAGE_URL = "https://i.ibb.co/4nPR0kht/IMG-20260119-WA0015.jpg";
 
-export default function About({aboutRef}) {
-    // short content blocks based on what you provided
-    const cards = [
-        {
-            id: "lead",
-            title: "High-end frontend developer",
-            body:
-                "Design excellence focused on meaning and experience. Everything has a purpose. Everything is doable.",
-        },
-        {
-            id: "values",
-            title: "What I value",
-            body:
-                "Clarity in every interaction. Thoughtful spacing, precise typography, and microcopy that guides rather than shouts.",
-        },
-        {
-            id: "approach",
-            title: "Signature approach",
-            body:
-                "Start from intent → refine through constraints → deliver a humane interface. I treat constraints as design opportunities.",
-        },
-        {
-            id: "skills",
-            title: "Skills & tools",
-            body:
-                "React  # TailwindCSS  # modern CSS patterns  # JS  # systems thinking",
-        },
-    ];
+const StatRow = ({ icon: Icon, label, value }) => (
+  <div className="flex items-center justify-between py-3 border-b border-white/5 font-mono text-sm hover:bg-white/5 px-2 transition-colors rounded">
+    <div className="flex items-center gap-3 text-gray-400">
+      <Icon size={16} className="text-accent-green" />
+      <span>{label}</span>
+    </div>
+    <span className="text-primary text-right">{value}</span>
+  </div>
+);
 
-    return (
-        <main
-            ref={aboutRef}
-            className="about-bg min-h-screen text-accent-white"
-            aria-labelledby="about-heading"
-        >
-            <div className="max-w-5xl mx-auto px-4 py-12">
-                {/* header row: title + read time */}
-                <header className="mb-8 flex flex-col items-center text-center gap-4">
+const SkillBar = ({ name, level, color = "bg-accent-green", label }) => (
+  <div className="flex flex-col gap-1 mb-3">
+    <div className="flex justify-between items-end">
+      <span className="font-mono text-xs text-gray-300">{name}</span>
+      {label && <span className="font-mono text-[10px] bg-accent-green/20 text-accent-green px-1 rounded">{label}</span>}
+    </div>
+    <div className="flex gap-0.5 h-2">
+      {[...Array(10)].map((_, i) => (
+        <div
+          key={i}
+          className={`flex-1 rounded-xs transition-all duration-500 ${i < level
+              ? `${color} shadow-[0_0_5px_currentColor]`
+              : 'bg-white/5'
+            }`}
+        />
+      ))}
+    </div>
+  </div>
+);
 
-                    <div className="flex flex-col items-center">
-                        <p className="text-support font-body font-bold text-2xl mb-4">
-                            About
-                        </p>
+const SkillMonitor = () => (
+  <div className="mt-8 pt-6 border-t border-white/10">
+    <h4 className="font-mono text-sm text-gray-400 mb-6 flex items-center gap-2">
+      <Activity size={16} className="text-accent-green" />
+      RESOURCE_MONITOR // Tech Stack
+    </h4>
 
-                        <h1
-                            id="about-heading"
-                            className="text-4xl md:text-6xl font-display font-bold leading-tight"
-                            style={{ lineHeight: "1.06" }}
-                        >
-                            Simeon Akinrinola
-                        </h1>
-
-                        <p className="mt-3 text-lg opacity-70 max-w-xl">
-                            High-end frontend developer. Design excellence and deliberate on meaning
-                            and experience.
-                        </p>
-                    </div>
-
-                    {/* read time — centered under everything */}
-                    <div className="text-sm opacity-70">
-                        <div className="inline-flex items-center gap-3">
-                            <span className="px-3 py-1 rounded-full bg-[rgba(0,0,0,0.25)] text-sm">
-                                30s read
-                            </span>
-                            <a
-                                href="#contact"
-                                className="text-sm underline hover:text-major underline-offset-4"
-                                aria-label="Jump to contact"
-                            >
-                                Contact
-                            </a>
-                        </div>
-                    </div>
-
-                </header>
-
-
-                {/* grid of large, airy, high-readability cards */}
-<section className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 mt-16">
-
-  {/* --- normal cards (no obsessions here) --- */}
-  {cards
-    .filter((c) => c.id !== "obsessions")
-    .map((c, idx) => (
-      <motion.article
-        key={c.id}
-        className="
-          p-8 md:p-10 
-          rounded-3xl 
-          backdrop-blur-xl 
-          bg-white/5 
-          border border-white/10 
-          shadow-[0_8px_32px_rgba(0,0,0,0.15)]
-          transition-all
-        "
-        initial={{ opacity: 0, y: 32 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.7, delay: idx * 0.08 }}
-        aria-labelledby={`${c.id}-title`}
-      >
-        <h3
-          id={`${c.id}-title`}
-          className="text-2xl md:text-3xl font-display text-support font-bold mb-4 leading-snug"
-        >
-          {c.title}
-        </h3>
-
-        <p className="text-lg md:text-xl leading-relaxed opacity-95">
-          {c.body}
-        </p>
-
-      </motion.article>
-    ))}
-
-  {/* --- dedicated, standalone OBSESSIONS BLOCK --- */}
-  <motion.article
-    id="obsessions"
-    className="
-      col-span-1 md:col-span-2
-      p-10 md:p-14 
-      rounded-3xl 
-      backdrop-blur-xl 
-      bg-white/5 
-      border border-white/5 
-      shadow-[0_12px_42px_rgba(0,0,0,0.1)]
-    "
-    initial={{ opacity: 0, y: 48 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.25 }}
-    transition={{ duration: 0.8 }}
-  >
-    <h3 className="text-3xl md:text-4xl text-support text-center font-display font-bold mb-8 leading-snug">
-      What I Obsess Over
-    </h3>
-
-    <div
-      className="
-        grid grid-cols-1 sm:grid-cols-2 gap-10 
-        text-[1.3rem] md:text-[1.6rem] 
-        leading-relaxed font-display
-      "
-    >
-      {/* LEFT COLUMN */}
-      <div className="space-y-5">
-
-        {/* exaggerated spacing */}
-        <p className="tracking-[0.4em] uppercase font-semibold opacity-90 text-[1.8rem] md:text-[2.1rem]">
-          S P A C I N G
-        </p>
-
-        {/* ultra heavy weight */}
-        <p className="font-black text-[2.6rem] md:text-[3rem] leading-none">
-          Weight
-        </p>
-
-        <motion.p
-                animate={{ opacity: [0.5, 1, 0.5], color: ['#fff', '#fad4d4', '#fff'] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-                className="font-semibold tracking-tight"
-        >
-  C͟o͟n͟t͟r͟a͟s͟t͟
-</motion.p>
-
-        <motion.p
-  initial={{ x: -10 }}
-  animate={{ x: 0 }}
-  transition={{ type: 'spring', stiffness: 100 }}
-  className="italic text-left text-[1.6rem] md:text-[1.8rem]"
->
-  Alignment
-</motion.p>
-
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* Column 1: Core Engine */}
+      <div>
+        <h5 className="font-bold text-white text-sm mb-4 border-b border-white/10 pb-2">Core AI Engine</h5>
+        <SkillBar name="Python" level={10} label="High Priority" />
+        <SkillBar name="LangChain" level={10} />
+        <SkillBar name="LangGraph" level={10} />
+        <SkillBar name="LlamaIndex" level={10} />
+        <SkillBar name="LLMs" level={10} />
       </div>
 
-      {/* RIGHT COLUMN */}
-      <div className="space-y-5">
+      {/* Column 2: Web Interface & Infra */}
+      <div>
+        <h5 className="font-bold text-white text-sm mb-4 border-b border-white/10 pb-2">Frontend Interface</h5>
+        <SkillBar name="React (Vite)" level={10} />
+        <SkillBar name="TailwindCSS" level={10} />
+        <SkillBar name="Vanilla JS" level={10} />
 
-        <motion.p
-  animate={{ y: [0, -5, 0] }}
-  transition={{ repeat: Infinity, duration: 1 }}
-  className="tracking-[0.35em] text-[1.9rem] md:text-[2.2rem]"
->
-  Rhythm
-</motion.p>
-
-
-        {/* hierarchy — strong underline */}
-        <p className="underline decoration-[6px] decoration-major font-bold">
-          Hierarchy
-        </p>
-
-        {/* clarity — spaced-out uppercase */}
-        <p className="uppercase tracking-[0.3em] font-semibold text-[2rem] md:text-[2.3rem]">
-          C L A R I T Y
-        </p>
-
-        <motion.p className=" text-center text-[1.7rem] md:text-[2rem] font-display">
-  Flow<span className="ml-1">
-    {['.', '.', '.'].map((dot, i) => (
-      <motion.span
-        key={i}
-        className="inline-block"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 1, 1, 0] }}
-        transition={{
-          duration: 1.2,
-          repeat: Infinity,
-          repeatType: "loop",
-          times: [0, 0.25, 0.5, 1],
-          delay: i * 0.4
-        }}
-      >
-        {dot}
-      </motion.span>
-    ))}
-  </span>
-</motion.p>
-
-
+        <h5 className="font-bold text-white text-sm mt-6 mb-4 border-b border-white/10 pb-2">Backend & Infra</h5>
+        <SkillBar name="Next.js" level={7} color="bg-accent-green/60" />
+        <SkillBar name="Node.js" level={7} color="bg-accent-green/60" />
+        <SkillBar name="FastAPI" level={7} color="bg-accent-green/60" />
       </div>
     </div>
-  </motion.article>
-
-  <motion.article
-  id="closing"
-  className="col-span-1 md:col-span-2 p-10 md:p-14 rounded-3xl backdrop-blur-2xl bg-white/5 border border-white/10 shadow-[0_12px_42px_rgba(0,0,0,0.2)]"
-  initial={{ opacity: 0, y: 48 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true, amount: 0.25 }}
-  transition={{ duration: 0.8 }}
->
-  <h3 className="text-3xl md:text-4xl text-center font-display font-bold mb-8 leading-snug">
-    Let's Talk
-  </h3>
-
-  <p className="text-center text-lg md:text-xl opacity-95 mb-8">
-    If you want purposeful frontends that prioritize product and people, let's connect.
-  </p>
-
-  <div className="flex justify-center gap-4">
-    <a
-      id="contact"
-      href="/#contact"
-      className="inline-block px-8 py-4 rounded-xl bg-major text-accent-white font-medium text-lg"
-      aria-label="Contact me"
-    >
-      Contact
-    </a>
-    <p className="self-center text-sm md:text-base opacity-80">
-      I reply within <strong>12 hours</strong>.
-    </p>
   </div>
-</motion.article>
+);
 
-</section>
+const About = () => {
+  return (
+    <section id="about" className="py-20 px-6 bg-black/20">
+      <div className="max-w-5xl mx-auto">
+        <div className="flex items-center gap-4 mb-12">
+          <h2 className="text-3xl font-bold"><span className="text-accent-green">whoami:</span> about</h2>
+          <div className="h-px bg-white/10 flex-1" />
+        </div>
 
-{/* footer detail */}
-<footer className="mt-20 text-base md:text-lg opacity-80 text-center">
-  <p>
-    When I'm not coding or studying, you'll probably find me playing chess.
-  </p>
-</footer>
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          {/* Left: Image / Visual */}
+          <div className="relative group top-0 md:sticky md:top-24">
+            <div className="absolute -inset-1 bg-gradient-to-r from-accent-green to-blue-600 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200 max-w-sm mx-auto"></div>
+            <div className="relative w-full aspect-[4/5] bg-[#0f0f0f] rounded-lg border border-white/10 overflow-hidden flex items-center justify-center max-w-sm mx-auto">
+              <img
+                src={PROFILE_IMAGE_URL}
+                alt="Simeon Akinrinola"
+                className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-500 hover:scale-105 transform"
+              />
 
-
-
+              {/* Overlay Scan Effect */}
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-green/5 to-transparent animate-scanline pointer-events-none" />
             </div>
-        </main>
-    );
-}
+            <div className="mt-4 text-center">
+              <p className="font-mono text-xs text-accent-green animate-pulse">Scanning identity... MATCH FOUND</p>
+            </div>
+          </div>
+
+          {/* Right: Specs */}
+          <div className="bg-[#0f0f0f] border border-white/10 rounded-xl p-6 shadow-2xl">
+            <div className="flex items-center gap-2 mb-6 pb-4 border-b border-white/10">
+              <div className="w-3 h-3 rounded-full bg-red-500" />
+              <div className="w-3 h-3 rounded-full bg-yellow-500" />
+              <div className="w-3 h-3 rounded-full bg-green-500" />
+              <span className="ml-2 font-mono text-xs text-gray-500">system_specs.json</span>
+            </div>
+
+            <div className="space-y-1">
+              <StatRow icon={Cpu} label="Architecture" value="Full Stack AI Engineer" />
+              <StatRow icon={Zap} label="Processing Power" value="High-Speed Execution" />
+              <StatRow icon={HardDrive} label="Memory" value="Continuous Learning" />
+              <StatRow icon={Activity} label="Status" value="Online & Ready" />
+            </div>
+
+            <div className="mt-8 pt-6 border-t border-white/10">
+              <div className="text-gray-400 text-sm leading-relaxed mb-4 space-y-4">
+                <p>
+                  <span className="text-accent-green font-mono">{'>'}</span> Professional Background initialized.<br />
+                  Passionate about building intelligent systems that enhance human capabilities. Experienced in Python, React, and AI Development.
+                </p>
+
+                <p>
+                  <span className="text-accent-green font-mono">{'>'}</span> I believe in practicing what I preach. That's why I built <span className="text-accent-green font-bold">Nexus</span>—not just as a chatbot, but as a digital pet that runs on my personal knowledge base. While I focus on architecture and strategy, Nexus handles the memory. It's a live demonstration of the RAG systems and Agentic workflows I build for clients.
+                </p>
+              </div>
+            </div>
+
+            <SkillMonitor />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default About;
