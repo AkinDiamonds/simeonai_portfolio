@@ -1,29 +1,48 @@
 import React from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 
-const ProjectCard = ({ title, desc, tags, className, size = "small" }) => (
-    <div className={`relative bg-[#0f0f0f] border border-white/10 rounded-xl p-6 hover:border-accent-green/50 transition-colors group overflow-hidden ${className}`}>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 z-10 pointer-events-none" />
+const ProjectCard = ({ className, title, desc, tags, githubUrl, externalUrl }) => {
+    return (
+        <div
+            className={`relative group overflow-hidden rounded-xl border border-white/10 p-6 flex flex-col justify-end transition-all hover:scale-[1.02] ${className}`}
+        >
+            {/* Dark Overlay: Fades to black on hover */}
+            <div className="absolute inset-0 bg-black/60 group-hover:bg-[#0a0a0a]/95 transition-colors duration-500" />
 
-        <div className="relative z-20 h-full flex flex-col justify-end">
-            <div className="mb-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-accent-green transition-colors">{title}</h3>
-                <p className="text-gray-400 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75 line-clamp-3">
+            {/* Content: Z-Index ensures it sits on top */}
+            <div className="relative z-10 space-y-3">
+                <div className="flex justify-between items-start">
+                    <h3 className="text-2xl font-bold text-white group-hover:text-accent-green transition-colors">{title}</h3>
+                    <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                        {githubUrl && (
+                            <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 rounded-full hover:bg-accent-green/20 hover:text-accent-green transition-colors">
+                                <Github size={18} />
+                            </a>
+                        )}
+                        {externalUrl && (
+                            <a href={externalUrl} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 rounded-full hover:bg-accent-green/20 hover:text-accent-green transition-colors">
+                                <ExternalLink size={18} />
+                            </a>
+                        )}
+                    </div>
+                </div>
+
+                <p className="text-gray-300 text-sm leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-500">
                     {desc}
                 </p>
-                <div className="flex gap-2 mb-4">
-                    {tags.map(tag => (
-                        <span key={tag} className="text-xs font-mono bg-white/5 px-2 py-1 rounded text-gray-300 border border-white/5">{tag}</span>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 pt-2">
+                    {tags.map((tag) => (
+                        <span key={tag} className="text-xs font-mono text-accent-green bg-accent-green/10 px-2 py-1 rounded border border-accent-green/20">
+                            #{tag}
+                        </span>
                     ))}
-                </div>
-                <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
-                    <button className="p-2 bg-white/5 rounded-full hover:bg-white/10 transition-colors"><Github size={18} /></button>
-                    <button className="p-2 bg-white/5 rounded-full hover:bg-white/10 transition-colors"><ExternalLink size={18} /></button>
                 </div>
             </div>
         </div>
-    </div>
-);
+    );
+};
 
 const Projects = () => {
     return (
@@ -42,15 +61,18 @@ const Projects = () => {
                         title="TouristAI: RAG Travel Concierge"
                         desc="A context-aware travel assistant for Lagos, Nigeria. The architecture employs a hybrid retrieval strategy: managing structured data in Supabase (PostgreSQL) and unstructured knowledge via FAISS vector stores. Uniquely, the inference pipeline is cost-optimized by tunneling requests to a Natlas LLM hosted on Kaggle via Ngrok, demonstrating distributed inference capabilities."
                         tags={['Python', 'LangChain', 'React', 'Supabase', 'FAISS', 'FastAPI', 'HuggingFace']}
-                        size="large"
+                        githubUrl="https://github.com/AkinDiamonds/touristai.git"
+                        externalUrl="https://drive.google.com/file/d/1R0LHZbzEqW3W4zS-svARdv2gNcbKT-vM/view?usp=drive_link"
                     />
 
                     {/* Secondary 1 */}
                     <ProjectCard
-                        className="md:col-span-1 md:row-span-1 bg-[url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80')] bg-cover bg-center"
-                        title="Speech Coach AI"
-                        desc="Real-time speech analysis tool providing feedback on pace, tone, and clarity."
-                        tags={['WebRTC', 'OpenAI', 'FastAPI']}
+                        className="md:col-span-1 md:row-span-1 bg-[url('https://i.ibb.co/84nxGcXc/Taxgpt.png')] bg-cover bg-center"
+                        title="TaxGPT"
+                        desc="RAG-powered tax assistant for Nigerian 2025 tax laws."
+                        tags={['OpenAI', 'FastAPI', 'LangChain', 'React']}
+                        githubUrl="https://github.com/KudoroEsther/Tax_Project.git"
+        
                     />
 
                     {/* Secondary 2 */}
@@ -59,11 +81,12 @@ const Projects = () => {
                         title="Smart Portfolio"
                         desc="The website you are currently viewing. High-performance, agentic-designed."
                         tags={['Vite', 'Tailwind', 'Framer', 'LangGraph']}
+                        githubUrl="https://github.com/AkinDiamonds/simeonai_portfolio.git"
+                        externalUrl="#"
                     />
-
                 </div>
 
-                
+
                 <div className="mt-4">
                     <div className="w-full border border-dashed border-white/10 bg-white/5 rounded-xl p-8 flex items-center justify-center text-center group cursor-wait">
                         <div className="space-y-2 animate-pulse">
