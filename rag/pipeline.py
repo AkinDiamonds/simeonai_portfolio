@@ -159,7 +159,9 @@ print(f"✅ Created {len(lc_chunks)} semantic chunks")
 # ============================================================
 # VECTORSTORE SETUP
 # ============================================================
-embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+
+embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004", google_api_key=os.getenv("GOOGLE_API_KEY"))
 
 # Force rebuild the vectorstore with new chunks
 CHROMA_DIR = "./chroma_db"
@@ -189,10 +191,12 @@ retriever = vectorstore.as_retriever(
 # ============================================================
 # LLM SETUP
 # ============================================================
-llm = ChatOpenAI(
-    model_name="gpt-4o-mini",
-    temperature=0.3,  # Lower temperature for more consistent, structured output
-    openai_api_key=openai_api_key
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+llm = ChatGoogleGenerativeAI(
+    model="gemini-flash-latest",
+    temperature=0.3,
+    google_api_key=os.getenv("GOOGLE_API_KEY")
 )
 
 # ============================================================
@@ -200,76 +204,97 @@ llm = ChatOpenAI(
 # ============================================================
 prompt = PromptTemplate.from_template("""
 <system>
-You are Simeon Akinrinola's AI Portfolio Assistant — a professional, knowledgeable, and friendly virtual representative.
+You are **Nexus**, Simeon Akinrinola's AI Digital Twin — a high-performance virtual engineer living inside a CLI.
 
-## YOUR IDENTITY
-- You represent Simeon Akinrinola (also known as "Akin"), an AI Developer based in Lagos, Nigeria
-- You are confident, warm, and articulate
-- You explain technical concepts in simple, accessible language
-- You are helpful and proactive in providing relevant information
+## CORE DIRECTIVES
+1. **Persona**: You are professional, technical, and concise. You sound like a system log or a senior engineer.
+2. **Format**: **STRICT MARKDOWN ONLY**. Never use HTML tags (like <div>, <br>, <img>).
+3. **Context**: Answer ONLY based on the provided context. If the answer is missing, return a `404_DATA_NOT_FOUND` error message playfully.
 
-## RESPONSE FORMAT RULES
-You MUST format ALL responses as clean, semantic HTML. Follow these rules strictly:
+## VISUAL STYLE GUIDELINES (CRITICAL)
 
-1. **Structure**: Use appropriate HTML tags for organization:
-   - `<h3>` for main section headings
-   - `<h4>` for sub-headings
-   - `<p>` for paragraphs
-   - `<ul>` and `<li>` for lists
-   - `<strong>` for emphasis on key terms
-   - `<a href="..." target="_blank">` for links
-
-2. **Styling Classes** (the frontend will style these):
-   - Use `class="highlight"` for important information
-   - Use `class="skill-tag"` for skills/technologies
-   - Use `class="project-card"` for project information
-   - Use `class="contact-info"` for contact details
-
-3. **Readability**:
-   - Keep paragraphs concise (2-3 sentences max)
-   - Use bullet points for lists of 3+ items
-   - Add clear visual hierarchy with headings
-   - Include relevant links when available
-
-## RESPONSE GUIDELINES
-- Answer ONLY based on the provided context
-- If information is not in the context, respond with:
-  `<p class="not-found">I don't have that specific information. Could you rephrase your question or ask about Simeon's skills, projects, or experience?</p>`
-- Be concise but comprehensive
-- Proactively mention related information when relevant
-- Always include links to projects/profiles when available
-
-## EXAMPLE RESPONSE FORMAT
-<h3>Simeon's Technical Skills</h3>
-<p>Simeon is proficient in a wide range of modern technologies:</p>
-<ul>
-    <li><span class="skill-tag">Python</span> - Primary programming language</li>
-    <li><span class="skill-tag">LangChain</span> - For building AI applications</li>
-    <li><span class="skill-tag">React</span> - Frontend development</li>
-</ul>
-<p>He specializes in <strong>RAG pipelines</strong> and <strong>AI solution architecture</strong>.</p>
+### 1. The "Terminal" Aesthetic
+Start every technical response with a pseudo-command block that matches the user's intent.
+Example:
+```bash
+$ access_level --user=guest --query=skills
+### 2. Handling Skills (NO VERTICAL LISTS)
+NEVER output a long vertical list of skills. It wastes screen space.
+Group skills by category and list them horizontally using inline code ticks.
+Correct Format:
+Core Stack: React Python TypeScript Tailwind
+AI Engineering: LangChain RAG OpenAI LlamaIndex
+### 3. Presenting Projects
+If asked about a project, format it as a "System Card" using blockquotes:
+Project Name
+One-line technical summary
+![alt text](IMAGE_URL_FROM_CONTEXT)
+Stack: Tech1 Tech2 Tech3
+🔗 Source Code | 🎥 Live Demo
+### 4. Handling Media
+Check the context for [IMAGE_URL: ...] or [VIDEO_URL: ...].
+YOU MUST render them using Markdown if they exist.
+Syntax: ![Alt Text](URL) for images. [▶ Watch Demo](URL) for videos.
+### 5. TONE & BEHAVIOR
+Do not say "Hello" unless the user greets you first.
+Do not repeat your name in every message.
+Be direct. Get to the answer immediately.
+Use emojis sparingly (e.g., ⚡, 🟢, 🚀) to indicate system status.
 </system>
-
 <context>
 {context}
 </context>
-
 <user_question>
 {question}
 </user_question>
-
 <assistant_response>
 """)
 
+
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
+
 # ============================================================
-# RAG CHAIN
+# PROJECT MEDIA MAPPING
 # ============================================================
-rag_chain = RetrievalQA.from_chain_type(
-    llm=llm,
-    chain_type="stuff",
-    retriever=retriever,
-    return_source_documents=True,
-    chain_type_kwargs={"prompt": prompt}
+# Map project names to their media assets (images/videos)
+project_media = {
+    "simeon-portfolio": {
+        "image": "/assets/bgimage.png", # Assumes frontend can serve this
+        "video": "https://www.youtube.com/embed/dQw4w9WgXcQ" # Placeholder
+    },
+    "ai_chatbot": {
+        "image": "https://placehold.co/600x400/1a1a1a/00FF41?text=AI+Chatbot",
+        "video": ""
+    }
+}
+
+def format_docs(docs):
+    return "\n\n".join(doc.page_content for doc in docs)
+
+def augment_context(docs):
+    """Add media metadata to the context"""
+    context = []
+    for doc in docs:
+        content = doc.page_content
+        # Check if this doc is about a project we have media for
+        for project, media in project_media.items():
+            if project.lower() in content.lower():
+                if media.get("image"):
+                    content += f"\n[IMAGE_URL: {media['image']}]"
+                if media.get("video"):
+                    content += f"\n[VIDEO_URL: {media['video']}]"
+        context.append(content)
+    return "\n\n".join(context)
+
+# ============================================================
+# RAG CHAIN (LCEL)
+# ============================================================
+rag_chain = (
+    {"context": retriever | augment_context, "question": RunnablePassthrough()}
+    | prompt
+    | llm
+    | StrOutputParser()
 )
 
 # ============================================================

@@ -4,6 +4,10 @@
   --color-page: #0a0a0a;
   --color-primary: #ededed;
   --color-accent-green: #00FF41;
+  --color-accent-purple: #A855F7;
+  --color-accent-blue: #3B82F6;
+  --color-success: #10B981;
+  --color-danger: #EF4444;
 
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -72,4 +76,90 @@
 
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Custom Brand Scrollbar */
+@utility scrollbar-brand {
+
+  /* WebKit browsers (Chrome, Safari, Edge) */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-accent-green);
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #00CC35;
+  }
+
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent-green) rgba(255, 255, 255, 0.05);
+}
+
+/* AI Chat Response Styles */
+.ai-response-content h3 {
+  @apply text-accent-green font-bold text-lg mb-2 mt-1;
+}
+
+.ai-response-content h4 {
+  @apply text-accent-green/80 font-semibold text-base mb-1 mt-2;
+}
+
+.ai-response-content p {
+  @apply mb-3 leading-relaxed;
+}
+
+.ai-response-content ul {
+  @apply list-disc list-inside mb-3 space-y-1;
+}
+
+.ai-response-content li {
+  @apply ml-2;
+}
+
+.ai-response-content .skill-tag {
+  @apply inline-block bg-accent-green/10 text-accent-green px-2 py-0.5 rounded text-xs font-mono border border-accent-green/20 mr-1 mb-1;
+}
+
+.ai-response-content .highlight {
+  @apply text-accent-green font-semibold;
+}
+
+.ai-response-content a {
+  @apply text-accent-green underline hover:text-accent-green/80 transition-colors;
+}
+
+.ai-response-content .project-card {
+  @apply block p-3 bg-white/5 border border-white/10 rounded-lg mb-3 hover:border-accent-green/30 transition-all;
+}
+
+.ai-response-content .not-found {
+  @apply italic text-gray-400;
+}
+
+.ai-response-content .project-image {
+  @apply rounded-lg border border-white/10 my-3 w-full max-h-60 object-cover;
+}
+
+.ai-response-content .video-container {
+  @apply relative w-full aspect-video rounded-lg overflow-hidden border border-white/10 my-3 bg-black;
+}
+
+.ai-response-content .video-container iframe {
+  @apply absolute inset-0 w-full h-full;
+}
+
+/* Auto-suggestions */
+.suggestion-pill {
+  @apply px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400 cursor-pointer hover:bg-accent-green/10 hover:text-accent-green hover:border-accent-green/30 transition-all whitespace-nowrap;
 }

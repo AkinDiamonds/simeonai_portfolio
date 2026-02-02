@@ -19,7 +19,7 @@ const Contact = () => {
         <section id="contact" className="py-20 px-6">
             <div className="max-w-4xl mx-auto">
                 <div className="flex items-center gap-4 mb-12">
-                    <h2 className="text-3xl font-bold"><span className="text-accent-green">./</span> contact_me</h2>
+                    <h2 className="text-3xl font-bold"><span className="text-accent-green">./</span> contact</h2>
                     <div className="h-px bg-white/10 flex-1" />
                 </div>
 
@@ -51,45 +51,45 @@ const Contact = () => {
                     {/* Form */}
                     <form onSubmit={handleSubmit} className="space-y-6 bg-[#0f0f0f] p-8 rounded-xl border border-white/10">
                         <div>
-                            <label className="block text-sm font-mono text-gray-400 mb-2">var input_name</label>
+                            <label className="block text-sm font-mono text-gray-400 mb-2">Name</label>
                             <input
                                 type="text"
                                 name="name"
                                 value={formData.name}
                                 onChange={handleChange}
-                                placeholder="Enter your name"
-                                className="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-accent-green focus:outline-none transition-colors"
+                                placeholder="John Doe"
+                                className="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-accent-green focus:outline-none focus:ring-2 focus:ring-accent-green/20 transition-all"
                                 required
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-mono text-gray-400 mb-2">var input_email</label>
+                            <label className="block text-sm font-mono text-gray-400 mb-2">Email</label>
                             <input
                                 type="email"
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                placeholder="Enter your email"
-                                className="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-accent-green focus:outline-none transition-colors"
+                                placeholder="you@example.com"
+                                className="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-accent-green focus:outline-none focus:ring-2 focus:ring-accent-green/20 transition-all"
                                 required
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-mono text-gray-400 mb-2">var input_message</label>
+                            <label className="block text-sm font-mono text-gray-400 mb-2">Message</label>
                             <textarea
                                 name="message"
                                 value={formData.message}
                                 onChange={handleChange}
-                                placeholder="Send me a message directly to my inbox..."
+                                placeholder="Tell me about your project..."
                                 rows="4"
-                                className="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-accent-green focus:outline-none transition-colors resize-none"
+                                className="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-accent-green focus:outline-none focus:ring-2 focus:ring-accent-green/20 transition-all resize-none"
                                 required
                             />
                         </div>
 
                         <button
                             type="submit"
-                            className="w-full py-3 bg-accent-green text-black font-bold rounded-lg hover:bg-emerald-400 transition-colors flex items-center justify-center gap-2"
+                            className="w-full py-3 bg-accent-green text-black font-bold rounded-lg hover:bg-emerald-400 hover:scale-105 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-accent-green/50"
                         >
                             <Send size={18} />
                             Send Message

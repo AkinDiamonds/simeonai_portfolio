@@ -26,16 +26,16 @@ const techs = [
 const TechTicker = () => {
     return (
         <div className="relative w-full py-10 overflow-hidden bg-page border-y border-white/5">
-            {/* Fade masks */}
-            <div className="absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-page to-transparent" />
-            <div className="absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-page to-transparent" />
+            {/* Fade masks - narrower on mobile */}
+            <div className="absolute inset-y-0 left-0 z-10 w-12 md:w-20 bg-gradient-to-r from-page to-transparent" />
+            <div className="absolute inset-y-0 right-0 z-10 w-12 md:w-20 bg-gradient-to-l from-page to-transparent" />
 
             <div className="flex">
                 <motion.div
                     className="flex gap-16 min-w-full pr-16"
                     animate={{ x: '-50%' }}
                     transition={{
-                        duration: 30,
+                        duration: 45,
                         ease: "linear",
                         repeat: Infinity,
                     }}

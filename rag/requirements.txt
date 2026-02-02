@@ -7,3 +7,5 @@ langchain-classic
 chromadb
 uvicorn
 openai
+langchain-google-genai
+google-generativeai

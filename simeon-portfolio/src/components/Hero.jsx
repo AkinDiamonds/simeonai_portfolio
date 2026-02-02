@@ -5,7 +5,7 @@ import Robot from './Robot';
 
 const Hero = ({ showRobot, onChatOpen }) => {
   return (
-    <section id="home" className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-10 px-6 overflow-hidden">
+    <section id="home" className="relative min-h-[90vh] flex items-center justify-center py-20 px-6 overflow-hidden">
 
       {/* Background Elements */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-green/5 rounded-full blur-3xl pointer-events-none" />
@@ -27,14 +27,14 @@ const Hero = ({ showRobot, onChatOpen }) => {
             Available for new projects
           </div>
 
-          <h1 className="text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.1]">
-            Simeon <br className="hidden md:block" />
+          <h1 className="text-6xl md:text-7xl font-bold tracking-tight leading-[1.1]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-200">Simeon</span> <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-emerald-600">
               Akinrinola
             </span>
           </h1>
 
-          <h2 className="text-2xl md:text-3xl font-mono text-gray-300">
+          <h2 className="text-2xl md:text-3xl font-mono text-accent-green/90 font-semibold">
             Full Stack Developer & AI Engineer
           </h2>
 
@@ -46,11 +46,11 @@ const Hero = ({ showRobot, onChatOpen }) => {
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <button
               onClick={onChatOpen}
-              className="group relative px-6 py-3 bg-accent-green/10 border border-accent-green/50 text-accent-green rounded-lg font-mono font-medium overflow-hidden transition-all hover:bg-accent-green/20 hover:shadow-[0_0_20px_rgba(0,255,65,0.3)]"
+              className="group relative px-8 py-4 bg-accent-green/20 border-2 border-accent-green/70 text-accent-green rounded-lg font-mono font-bold text-lg overflow-hidden transition-all hover:bg-accent-green/30 hover:shadow-[0_0_30px_rgba(0,255,65,0.4)] hover:scale-105"
             >
               <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent-green/10 to-transparent -translate-x-full group-hover:animate-shimmer" />
               <span className="flex items-center justify-center gap-2">
-                Talk to Nexus <Terminal size={18} />
+                Talk to Nexus <Terminal size={20} />
               </span>
             </button>
 
@@ -71,7 +71,7 @@ const Hero = ({ showRobot, onChatOpen }) => {
               <motion.div layoutId="robot-mascot" className="relative group/robot">
                 {/* Chat Bubble Tooltip */}
                 <div className="absolute -top-16 -right-16 md:-right-24 bg-white/10 backdrop-blur-md border border-accent-green/30 p-3 rounded-lg max-w-[150px] text-xs text-white font-mono opacity-0 group-hover/robot:opacity-100 transition-opacity duration-300 pointer-events-none z-20">
-                  "I am Nexus, a RAG-powered assistant. Ask me questions about The Boss."
+                  "Hey! I'm Nexus, Simeon's AI assistant. Ask me about his work."
                   <div className="absolute bottom-0 left-0 w-3 h-3 bg-white/10 border-b border-l border-accent-green/30 transform -translate-x-1/2 translate-y-1/2 rotate-45"></div>
                 </div>
 
