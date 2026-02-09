@@ -24,8 +24,8 @@ const SkillBar = ({ name, level, color = "bg-accent-green", label }) => (
         <div
           key={i}
           className={`flex-1 rounded-xs transition-all duration-500 ${i < level
-              ? `${color} shadow-[0_0_5px_currentColor]`
-              : 'bg-white/5'
+            ? `${color} shadow-[0_0_5px_currentColor]`
+            : 'bg-white/5'
             }`}
         />
       ))}
@@ -44,10 +44,10 @@ const SkillMonitor = () => (
       {/* Column 1: Core Engine */}
       <div>
         <h5 className="font-bold text-white text-sm mb-4 border-b border-white/10 pb-2">Core AI Engine</h5>
-        <SkillBar name="Python" level={10} label="High Priority" />
+        <SkillBar name="Python" level={10} />
         <SkillBar name="LangChain" level={10} />
-        <SkillBar name="LangGraph" level={10} />
-        <SkillBar name="LlamaIndex" level={10} />
+        <SkillBar name="LangGraph" level={9} />
+        <SkillBar name="LlamaIndex" level={9} />
         <SkillBar name="LLMs" level={10} />
       </div>
 
@@ -56,12 +56,12 @@ const SkillMonitor = () => (
         <h5 className="font-bold text-white text-sm mb-4 border-b border-white/10 pb-2">Frontend Interface</h5>
         <SkillBar name="React (Vite)" level={10} />
         <SkillBar name="TailwindCSS" level={10} />
-        <SkillBar name="Vanilla JS" level={10} />
+        <SkillBar name="Vanilla JS" level={9} />
 
         <h5 className="font-bold text-white text-sm mt-6 mb-4 border-b border-white/10 pb-2">Backend & Infra</h5>
-        <SkillBar name="Next.js" level={7} color="bg-accent-green/60" />
-        <SkillBar name="Node.js" level={7} color="bg-accent-green/60" />
-        <SkillBar name="FastAPI" level={7} color="bg-accent-green/60" />
+        <SkillBar name="Next.js" level={7} />
+        <SkillBar name="Node.js" level={8} />
+        <SkillBar name="FastAPI" level={9} />
       </div>
     </div>
   </div>
@@ -79,16 +79,13 @@ const About = () => {
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Left: Image / Visual */}
           <div className="relative group top-0 md:sticky md:top-24">
-            <div className="absolute -inset-1 bg-gradient-to-r from-accent-green to-blue-600 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200 max-w-sm mx-auto"></div>
+            <div className="absolute -inset-1 bg-gradient-to-r from-white/10 to-white/5 rounded-lg blur opacity-20 group-hover:opacity-40 transition duration-500 max-w-sm mx-auto"></div>
             <div className="relative w-full aspect-[4/5] bg-[#0f0f0f] rounded-lg border border-white/10 overflow-hidden flex items-center justify-center max-w-sm mx-auto">
               <img
                 src={PROFILE_IMAGE_URL}
                 alt="Simeon Akinrinola"
-                className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-500 hover:scale-105 transform"
+                className="w-full h-full object-cover opacity-95 hover:opacity-100 transition-opacity duration-300"
               />
-
-              {/* Overlay Scan Effect */}
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-green/5 to-transparent animate-scanline pointer-events-none" />
             </div>
             <div className="mt-4 text-center">
               <p className="font-mono text-xs text-accent-green animate-pulse"> Nexus found: ...jpeg</p>
@@ -114,12 +111,11 @@ const About = () => {
             <div className="mt-8 pt-6 border-t border-white/10">
               <div className="text-gray-400 text-sm leading-relaxed mb-4 space-y-4">
                 <p>
-                  <span className="text-accent-green font-mono">{'>'}</span> Professional Background initialized.<br />
-                  Passionate about building intelligent systems that enhance human capabilities. Experienced in Python, React, and AI Development.
+                  <span className="text-accent-green font-mono">{'>'}</span> I'm a full-stack engineer who specializes in building AI systems that feel intelligent and intuitive. I don't just write code—I architect solutions that scale.
                 </p>
 
                 <p>
-                  <span className="text-accent-green font-mono">{'>'}</span> I believe in practicing what I preach. That's why I built <span className="text-accent-green font-bold">Nexus</span>—not just as a chatbot, but as a digital pet that runs on my personal knowledge base. While I focus on architecture and strategy, Nexus handles the memory. It's a live demonstration of the RAG systems and Agentic workflows I build for clients.
+                  <span className="text-accent-green font-mono">{'>'}</span> I believe in practicing what I preach. That's why I built <span className="text-accent-green font-bold">Nexus</span>—not just as a chatbot, but as a digital assistant powered by my personal knowledge base. While I focus on architecture and strategy, Nexus handles the memory. It's a live demonstration of the RAG systems and Agentic workflows I build for clients.
                 </p>
               </div>
             </div>

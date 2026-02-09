@@ -47,38 +47,21 @@ def clean_html_response(html: str) -> str:
     
     return html
 
-@app.post("/query", response_model=QueryResponse)
+from fastapi.responses import StreamingResponse
+import json
+
+@app.post("/query")
 async def query_rag(request: QueryRequest):
     """
     Query the RAG system with a question about Simeon.
-    Returns an HTML-formatted response with source metadata.
+    Returns a streaming response of the answer.
     """
-    result = rag_chain.invoke({"query": request.question})
-    
-    # Clean the HTML response
-    answer_html = clean_html_response(result['result'])
-    
-    # Extract source metadata
-    sources = []
-    for doc in result['source_documents']:
-        source_info = {
-            "section_type": doc.metadata.get("section_type", "unknown"),
-        }
-        # Add optional metadata if present
-        if "project_name" in doc.metadata:
-            source_info["project_name"] = doc.metadata["project_name"]
-        if "github_url" in doc.metadata:
-            source_info["github_url"] = doc.metadata["github_url"]
-        if "job_titles" in doc.metadata:
-            source_info["job_titles"] = doc.metadata["job_titles"]
-        sources.append(source_info)
-    
-    return QueryResponse(
-        question=request.question,
-        answer=answer_html,
-        sources=sources,
-        source_count=len(sources)
-    )
+    async def generate():
+        # Stream the response from the chain
+        async for chunk in rag_chain.astream(request.question):
+            yield chunk
+
+    return StreamingResponse(generate(), media_type="text/plain")
 
 @app.get("/")
 def root():

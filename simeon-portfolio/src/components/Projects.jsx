@@ -6,8 +6,8 @@ const ProjectCard = ({ className, title, desc, tags, githubUrl, externalUrl }) =
         <div
             className={`relative group overflow-hidden rounded-xl border border-white/10 p-6 flex flex-col justify-end transition-all hover:scale-[1.02] ${className}`}
         >
-            {/* Dark Overlay: Fades to black on hover */}
-            <div className="absolute inset-0 bg-black/60 group-hover:bg-[#0a0a0a]/95 transition-colors duration-500" />
+            {/* Dark Overlay: More subtle change on hover */}
+            <div className="absolute inset-0 bg-black/80 group-hover:bg-black/90 transition-colors duration-300" />
 
             {/* Content: Z-Index ensures it sits on top */}
             <div className="relative z-10 space-y-3">
@@ -27,7 +27,7 @@ const ProjectCard = ({ className, title, desc, tags, githubUrl, externalUrl }) =
                     </div>
                 </div>
 
-                <p className="text-gray-300 text-sm leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-500">
+                <p className="text-gray-300 text-sm leading-relaxed h-16 overflow-hidden">
                     {desc}
                 </p>
 
@@ -35,7 +35,7 @@ const ProjectCard = ({ className, title, desc, tags, githubUrl, externalUrl }) =
                 <div className="flex flex-wrap gap-2 pt-2">
                     {tags.map((tag) => (
                         <span key={tag} className="text-xs font-mono text-accent-green bg-accent-green/10 px-2 py-1 rounded border border-accent-green/20">
-                            #{tag}
+                            {tag}
                         </span>
                     ))}
                 </div>
@@ -72,7 +72,7 @@ const Projects = () => {
                         desc="RAG-powered tax assistant for Nigerian 2025 tax laws."
                         tags={['OpenAI', 'FastAPI', 'LangChain', 'React']}
                         githubUrl="https://github.com/KudoroEsther/Tax_Project.git"
-        
+
                     />
 
                     {/* Secondary 2 */}
