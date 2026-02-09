@@ -72,7 +72,7 @@ const About = () => {
     <section id="about" className="py-20 px-6 bg-black/20">
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center gap-4 mb-12">
-          <h2 className="text-3xl font-bold"><span className="text-accent-green">./ about</span></h2>
+          <h2 className="text-3xl font-bold"><span className="text-accent-green">./</span> about</h2>
           <div className="h-px bg-white/10 flex-1" />
         </div>
 

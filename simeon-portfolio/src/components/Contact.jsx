@@ -26,9 +26,9 @@ const Contact = () => {
                 <div className="grid md:grid-cols-2 gap-12">
                     {/* Contact Info */}
                     <div className="space-y-8">
-                        <h3 className="text-2xl font-bold text-white">Let's Build Something Intelligent</h3>
+                        <h3 className="text-2xl font-bold text-white">Let Me Help You Build Something Intelligent</h3>
                         <p className="text-gray-400 leading-relaxed">
-                            Whether you need an AI-powered application, a full-stack renovation, or just want to talk about GenAI, I'm open for opportunities.
+                            Do you need an AI-powered application, a full-stack renovation, or just want to talk about GenAI, I'm open for _________.
                         </p>
 
                         <div className="space-y-4">
@@ -57,7 +57,7 @@ const Contact = () => {
                                 name="name"
                                 value={formData.name}
                                 onChange={handleChange}
-                                placeholder="John Doe"
+                                placeholder="Chika Ayinla Musa"
                                 className="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-accent-green focus:outline-none focus:ring-2 focus:ring-accent-green/20 transition-all"
                                 required
                             />
@@ -80,7 +80,7 @@ const Contact = () => {
                                 name="message"
                                 value={formData.message}
                                 onChange={handleChange}
-                                placeholder="Tell me about your project..."
+                                placeholder="Tell me about your project/offer..."
                                 rows="4"
                                 className="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-white focus:border-accent-green focus:outline-none focus:ring-2 focus:ring-accent-green/20 transition-all resize-none"
                                 required
