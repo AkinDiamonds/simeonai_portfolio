@@ -72,7 +72,7 @@ const About = () => {
     <section id="about" className="py-20 px-6 bg-black/20">
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center gap-4 mb-12">
-          <h2 className="text-3xl font-bold"><span className="text-accent-green">whoami:</span> about</h2>
+          <h2 className="text-3xl font-bold"><span className="text-accent-green">./ about</span></h2>
           <div className="h-px bg-white/10 flex-1" />
         </div>
 
@@ -91,7 +91,7 @@ const About = () => {
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-green/5 to-transparent animate-scanline pointer-events-none" />
             </div>
             <div className="mt-4 text-center">
-              <p className="font-mono text-xs text-accent-green animate-pulse">Scanning identity... MATCH FOUND</p>
+              <p className="font-mono text-xs text-accent-green animate-pulse"> Nexus found: ...jpeg</p>
             </div>
           </div>
 
